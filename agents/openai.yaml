@@ -1,0 +1,4 @@
+interface:
+  display_name: "嵌入式项目工作量评估"
+  short_description: "依据嵌入式项目资料拆分评估工作项、标注型号数量、编写简短目标并核对范围"
+  default_prompt: "使用 $embedded-effort-estimation 根据我提供的资料整理评估表，先展示工作项和简短 Note，人力留空。"
