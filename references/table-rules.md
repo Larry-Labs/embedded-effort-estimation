@@ -8,12 +8,12 @@
 | Module | 工作大类，如 Baseline、BSP、MCU、Test |
 | Category | 子类，如 Board Bring-up、Driver / Firmware |
 | Feature | 具体工作对象，注明已知型号及数量 |
-| Note | 做什么、达到什么基本目标；一条简短句子 |
+| Note | 做什么、达到什么目标；简短描述 |
 | Cost (MM) | 人月；未要求估算则留空 |
 | Quotation | 报价信息，未提供则留空，不从 MM 自动换算 |
 | Comments | 依赖、前提、排除项、待确认信息 |
 
-默认用上述八列，不同时建立同义的“评估范围”列。已有表的 Cost（MM）等命名保留。中文/英文 Note 对照列仅在用户要求时增加；没有特殊要求时可中文沟通、简单英文入表。
+上述八列是参考结构，按用户要求选择列和语言；避免增加同义的重复字段。
 
 ## Note 示例
 
@@ -21,28 +21,28 @@
 
 | 工作项 | 中文 Note | 简单英文 Note |
 | --- | --- | --- |
-| Build and Flash Environment Setup | 配置编译和烧录环境，完成镜像编译与烧录。 | Set up the build and flashing environment and verify image build and flashing. |
+| Build Environment Setup | 配置编译环境并完成目标镜像编译。 | Set up the build environment and build the target image. |
 | Source Baseline | 建立客户代码基线并集成所需供应商软件包。 | Set up the customer source baseline and required vendor packages. |
-| Board Boot and Debug | 完成系统启动，使能 ADB、串口和日志。 | Boot the board and enable ADB, serial access and logs. |
+| Board Bring-up | 完成板卡启动并验证所需调试接口。 | Boot the board and verify the required debug interfaces. |
 | CAN | 完成已确认路数的 CAN 基础收发。 | Enable basic CAN transmit and receive on the specified channels. |
 | SPI NOR | 完成器件识别及基础擦写读取。 | Detect the flash and verify basic erase, write and read. |
 | Wi-Fi Module Bring-up | 完成模块供电、复位和主机接口识别。 | Verify module power, reset and host interface detection. |
 | Basic Function Test | 完成范围内功能的基础测试。 | Run basic function tests for the agreed scope. |
-| Stability Test | 长时间挂机，确认系统不死机。 | Verify that the system runs for an extended period without hanging or crashing. |
+| Stability Test | 按约定条件执行稳定性测试并记录结果。 | Run stability tests under the agreed conditions and record the results. |
 | Hardware Test Support | 配合硬件测试并定位相关问题。 | Support hardware testing and issue analysis. |
 
-示例中的接口仅适用于资料确认的项目。不要给所有板卡添加 ADB。稳定性测试不擅自添加 72 小时、压力负载或温度条件；如需正式验收阈值，另行确认。
+示例仅展示句式。具体接口、功能深度、测试条件和验收标准来自项目资料；未明确的关键条件列为待确认。
 
 ## 按项目选择粒度
 
-- EVK/载板：可按 SoC 基础启动、独立外设链路、MCU 子系统划分。两路同型号器件可写在一项中并注明数量，不直接把单路人力乘二。
-- 音频：音频主芯片、DAC、A2B 是否拆项取决于独立适配工作。拆项时标明各自边界；天线、插座和连接器通常归入关联 Note 或 Comments。
-- 摄像头：区分摄像头数量、串/解串器数量和 CSI lane 数。lane 数不是摄像头数量；标注冲突先确认。
-- MCU：按项目实际范围拆分基础启动、外设适配和主机通信，说明主机与 MCU 两端职责；不要把 SoC 的外设算成 MCU 的外设。
-- 认证：基础环境、模块 Bring-up、驱动/固件、平台集成与认证工具/准备/支持/交付按资料拆分。已有 CE/NCC、WFA 工作块保留；“认证支持”不等于承诺拿证。
-- Test 默认整体一条。用户另行要求稳定性或 Hardware Test Support 时单列，明确它与开发自测、基础功能测试的区别。
-- 电源器件不必都有软件驱动：已确认在范围内可写上电/配置验证，控制方式未知时说明待确认，不能根据芯片框图虚构接口。
-- Build Environment 与 Flashing、Boot 与 Debug 可合并为一个工作包。驱动与固件适配、测试工具开发与认证支持是否合并，以实际边界为准。
+- 按工作目标、实现边界和验证方式确定粒度；不按框图方框数量或开发步骤数机械拆项。
+- 名称或功能相近不等于同一工作项。实现不同、依赖不同或可独立验收时分别列项；属于同一目标且无法独立评估时可合并，并说明覆盖范围。
+- 同型号多实例注明数量，结合复用程度和独立联调工作评估，不机械倍增人力。
+- 区分设备数量、物理通道数和协议资源数，不互相换算或相乘。
+- 跨处理器、板卡或软件层的工作说明两端职责与公共部分，避免重复计入。
+- 硬件器件存在不代表需要开发驱动；依据控制方式和软件职责判断工作内容。
+- 测试按功能、条件、目标和独立工作量决定是否拆分，不固定行数；与开发自测的边界要明确。
+- 支持类工作与最终结果承诺分别描述，例如测试支持不自动包含认证通过承诺。
 
 ## Comments 示例
 
